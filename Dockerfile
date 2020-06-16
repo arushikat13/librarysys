@@ -1,7 +1,26 @@
-FROM php:7.2-cli
+FROM ubuntu
+#FROM php:7.0-apache  
+COPY . /var/www/php
 
-COPY php-site /usr/src/php-site
+RUN apt-get update 
+RUN apt-get install –y apache2 
+RUN apt-get install –y apache2-utils 
+RUN apt-get clean
+CMD [“apache2ctl”, “-D”, “FOREGROUND”]
 
-WORKDIR  /usr/src/php-site
 
-CMD [ "php", "./index.php" ]
+#FROM php:7.2-cli
+
+#docCOPY php-site /usr/src/php-site
+#WORKDIR  /usr/src/php-site
+
+
+
+ENTRYPOINT [ "php","S 0.0.0.0:2000", "./index.php", ]
+
+
+
+
+
+
+
